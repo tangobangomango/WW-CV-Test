@@ -28,26 +28,12 @@ class CollectionViewController: UICollectionViewController {
         ["Category 6", "$100", "$200", "$300", "$400", "$500"]
     ]
     
-//    let statusBarHeight: CGFloat = {
-//        var heightToReturn: CGFloat = 0.0
-//             for window in UIApplication.shared.windows {
-//                 if let height = window.windowScene?.statusBarManager?.statusBarFrame.height, height > heightToReturn {
-//                     heightToReturn = height
-//                 }
-//             }
-//        return heightToReturn
-//    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Register cell classes
-        
-
-        // Do any additional setup after loading the view.
     }
 
     /*
@@ -62,6 +48,8 @@ class CollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
+    
+
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -70,7 +58,7 @@ class CollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return dataString.count
+        return Int(itemsPerColumn * itemsPerRow)
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

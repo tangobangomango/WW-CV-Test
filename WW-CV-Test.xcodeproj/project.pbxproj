@@ -13,7 +13,8 @@
 		4154FC5424538EC100DD7BD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4154FC5324538EC100DD7BD0 /* Assets.xcassets */; };
 		4154FC5724538EC100DD7BD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4154FC5524538EC100DD7BD0 /* LaunchScreen.storyboard */; };
 		4154FC5F24538F9100DD7BD0 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4154FC5E24538F9100DD7BD0 /* CollectionViewController.swift */; };
-		4154FC612453965000DD7BD0 /* WWCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4154FC602453965000DD7BD0 /* WWCollectionViewCell.swift */; };
+		4154FC632454C01300DD7BD0 /* BoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4154FC622454C01300DD7BD0 /* BoardViewController.swift */; };
+		41CBDBB22454C7C50077C4CA /* WWCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CBDBB12454C7C50077C4CA /* WWCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +26,8 @@
 		4154FC5624538EC100DD7BD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4154FC5824538EC100DD7BD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4154FC5E24538F9100DD7BD0 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
-		4154FC602453965000DD7BD0 /* WWCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWCollectionViewCell.swift; sourceTree = "<group>"; };
+		4154FC622454C01300DD7BD0 /* BoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViewController.swift; sourceTree = "<group>"; };
+		41CBDBB12454C7C50077C4CA /* WWCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +67,8 @@
 				4154FC5524538EC100DD7BD0 /* LaunchScreen.storyboard */,
 				4154FC5824538EC100DD7BD0 /* Info.plist */,
 				4154FC5E24538F9100DD7BD0 /* CollectionViewController.swift */,
-				4154FC602453965000DD7BD0 /* WWCollectionViewCell.swift */,
+				4154FC622454C01300DD7BD0 /* BoardViewController.swift */,
+				41CBDBB12454C7C50077C4CA /* WWCollectionViewCell.swift */,
 			);
 			path = "WW-CV-Test";
 			sourceTree = "<group>";
@@ -143,8 +146,9 @@
 			files = (
 				4154FC5F24538F9100DD7BD0 /* CollectionViewController.swift in Sources */,
 				4154FC4B24538EBD00DD7BD0 /* AppDelegate.swift in Sources */,
-				4154FC612453965000DD7BD0 /* WWCollectionViewCell.swift in Sources */,
 				4154FC4D24538EBD00DD7BD0 /* SceneDelegate.swift in Sources */,
+				4154FC632454C01300DD7BD0 /* BoardViewController.swift in Sources */,
+				41CBDBB22454C7C50077C4CA /* WWCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
