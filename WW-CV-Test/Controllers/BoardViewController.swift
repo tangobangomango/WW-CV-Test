@@ -14,9 +14,16 @@ private let itemsPerRow: CGFloat = 6
 private let itemsPerColumn: CGFloat = 6
 
 
-class BoardViewController: UIViewController, UICollectionViewDelegateFlowLayout {
+class BoardViewController: UIViewController {
     
-    let dataString = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    var questionsAndAnswers: [TriviaModel] = []
+    var difficulty: TriviaModel.gameType = .single
+    
+    var triviaManager = TriviaManager()
+    
+    var boardData: [[TriviaModel]] = []
+
+    
     
     let data = [
         ["Category 1", "$100", "$200", "$300", "$400", "$500"],
@@ -34,11 +41,52 @@ class BoardViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         super.viewDidLoad()
         boardCollectionView.delegate = self
         boardCollectionView.dataSource = self
+        boardCollectionView.register(WWCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        triviaManager.delegate = self
+        let catIDS = [57, 1, 5, 7, 11531, 11532]
+        triviaManager.fetch(catIDS)
 
     }
     
-    // MARK: - Collection View Flow Layout Delegate
+    func getTriviaData() {
+        var categoryList: [Int] = []
+        for i in 0...5 {
+           categoryList[i] = Int.random(in: 1...100)
+        }
+        
+//        triviaManager.fetchTrivia(for: categoryList)
+    }
+}
 
+// MARK: - UICollectionView data source
+extension BoardViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+         // #warning Incomplete implementation, return the number of sections
+         return 1
+     }
+
+
+     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+         // #warning Incomplete implementation, return the number of items
+         return Int(itemsPerColumn * itemsPerRow)
+     }
+
+     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! WWCollectionViewCell
+//         cell.backgroundColor = UIColor.systemGray
+         // Configure the cell
+         let columnNumber = indexPath.row / Int(itemsPerColumn)
+         let rowNumber = indexPath.row % Int(itemsPerColumn)
+         cell.label.text = data[columnNumber][rowNumber]
+        
+         return cell
+     }
+    
+}
+
+// MARK: - Collection View Flow Layout Delegate
+extension BoardViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -70,33 +118,29 @@ class BoardViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     }
 
 
-
 }
 
-extension BoardViewController: UICollectionViewDataSource {
+extension BoardViewController: TriviaManagerDelegate {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-         // #warning Incomplete implementation, return the number of sections
-         return 1
-     }
-
-
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         // #warning Incomplete implementation, return the number of items
-         return Int(itemsPerColumn * itemsPerRow)
-     }
-
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! WWCollectionViewCell
-         cell.backgroundColor = UIColor.systemGray
-         // Configure the cell
-         let columnNumber = indexPath.row / Int(itemsPerColumn)
-         let rowNumber = indexPath.row % Int(itemsPerColumn)
-         cell.cellLabel.text = data[columnNumber][rowNumber]
-        
-         return cell
-     }
+    func didUpdateTriviaData(_ triviaManager: TriviaManager, triviaModels: [[TriviaModel]]) {
+        DispatchQueue.main.async {
+//            self.questionsAndAnswers = triviaModel
+////            print("triviaModel returned")
+//            self.tableView.reloadData()
+//            let category = self.questionsAndAnswers[0].categoryName
+//            let titleString = category.capitalized
+//            self.title = titleString
+            print(triviaModels.count)
+            self.boardData = triviaModels
+            for triviaModel in triviaModels {
+                print(triviaModel[0].categoryName)
+            }
+        }
+    }
     
+    func didFailWithError(error: Error) {
+        print(error)
+    }
 }
 
 
