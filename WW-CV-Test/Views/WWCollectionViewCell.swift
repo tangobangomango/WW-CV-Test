@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import PaddingLabel
 
 class WWCollectionViewCell: UICollectionViewCell {
     
-    var label = UILabel()
+    var label = PaddingLabel()
     var imageView = UIImageView()
     
     override init(frame: CGRect) {
@@ -34,6 +35,9 @@ class WWCollectionViewCell: UICollectionViewCell {
         label.textColor = UIColor.black
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.minimumScaleFactor = 0.8
+        label.adjustsFontSizeToFitWidth = true
+//        label.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20.0, leading: 20.0, bottom: 20.0, trailing: 20.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         addSubview(label)
         
@@ -43,6 +47,7 @@ class WWCollectionViewCell: UICollectionViewCell {
         label.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         label.sizeToFit()
+        
         
     }
     

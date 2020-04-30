@@ -9,30 +9,25 @@
 import UIKit
 
 private let reuseIdentifier = "Cell"
+private let contentSegueIdentifier = "ShowContent"
 private let sectionInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
 private let itemsPerRow: CGFloat = 6
 private let itemsPerColumn: CGFloat = 6
+private let topOfCategoryRange = 1000
 
 
 class BoardViewController: UIViewController {
     
     var questionsAndAnswers: [TriviaModel] = []
-    var difficulty: TriviaModel.gameType = .single
+    var gameType: TriviaModel.gameType = .single
     
     var triviaManager = TriviaManager()
     
     var boardData: [[TriviaModel]] = []
 
-    
-    
-    let data = [
-        ["Category 1", "$100", "$200", "$300", "$400", "$500"],
-        ["Category 2", "$100", "$200", "$300", "$400", "$500"],
-        ["Category 3", "$100", "$200", "$300", "$400", "$500"],
-        ["Category 4", "$100", "$200", "$300", "$400", "$500"],
-        ["Category 5", "$100", "$200", "$300", "$400", "$500"],
-        ["Category 6", "$100", "$200", "$300", "$400", "$500"]
-    ]
+    let blankSingle = ["", "$100", "$200", "$300", "$400", "$500"]
+           
+    let blankDouble = ["", "$200", "$400", "$600", "$800", "$1000"]
     
 
     @IBOutlet weak var boardCollectionView: UICollectionView!
@@ -43,47 +38,73 @@ class BoardViewController: UIViewController {
         boardCollectionView.dataSource = self
         boardCollectionView.register(WWCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         triviaManager.delegate = self
-        let catIDS = [57, 1, 5, 7, 11531, 11532]
-        triviaManager.fetch(catIDS)
+        let catIDS = generateRandomCategories(topOfRange: topOfCategoryRange)
+        triviaManager.fetch(catIDS, for: gameType)
 
     }
     
-    func getTriviaData() {
-        var categoryList: [Int] = []
-        for i in 0...5 {
-           categoryList[i] = Int.random(in: 1...100)
+    func generateRandomCategories(topOfRange: Int) -> [Int] {
+        var randomCategories: [Int] = []
+        for _ in 0...5 {
+            randomCategories.append(Int.random(in: 1...topOfRange))
         }
-        
-//        triviaManager.fetchTrivia(for: categoryList)
+        return randomCategories
     }
+    
+    // MARK: - Navigation
+    
+    
+    
+    @IBAction func unwindToBoardViewController(_ unwindSegue: UIStoryboardSegue) {
+        let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+    }
+    
 }
 
 // MARK: - UICollectionView data source
 extension BoardViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-         // #warning Incomplete implementation, return the number of sections
-         return 1
+         
+        return 1
      }
 
 
      func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         // #warning Incomplete implementation, return the number of items
+ 
          return Int(itemsPerColumn * itemsPerRow)
      }
 
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! WWCollectionViewCell
-//         cell.backgroundColor = UIColor.systemGray
-         // Configure the cell
+
          let columnNumber = indexPath.row / Int(itemsPerColumn)
          let rowNumber = indexPath.row % Int(itemsPerColumn)
-         cell.label.text = data[columnNumber][rowNumber]
+        
+        if gameType == TriviaModel.gameType.single {
+            cell.label.text = blankSingle[rowNumber]
+        } else {
+            cell.label.text = blankDouble[rowNumber]
+        }
+        
+        if boardData.count == 6 {
+            if rowNumber == 0 {
+                let cellLabel = "\(boardData[columnNumber][0].categoryName)"
+                cell.label.text = cellLabel.capitalized
+               cell.isUserInteractionEnabled = false
+            }
+            
+        }
         
          return cell
      }
     
+    
+    
 }
+
+
 
 // MARK: - Collection View Flow Layout Delegate
 extension BoardViewController: UICollectionViewDelegateFlowLayout {
@@ -124,21 +145,21 @@ extension BoardViewController: TriviaManagerDelegate {
     
     func didUpdateTriviaData(_ triviaManager: TriviaManager, triviaModels: [[TriviaModel]]) {
         DispatchQueue.main.async {
-//            self.questionsAndAnswers = triviaModel
-////            print("triviaModel returned")
-//            self.tableView.reloadData()
-//            let category = self.questionsAndAnswers[0].categoryName
-//            let titleString = category.capitalized
-//            self.title = titleString
+            print("triviaModel returned")
             print(triviaModels.count)
+            if triviaModels.count != 6 {
+                let newCategories = self.generateRandomCategories(topOfRange: topOfCategoryRange)
+                triviaManager.fetch(newCategories, for: self.gameType)
+            }
             self.boardData = triviaModels
             for triviaModel in triviaModels {
                 print(triviaModel[0].categoryName)
             }
+            self.boardCollectionView.reloadData()
         }
     }
     
-    func didFailWithError(error: Error) {
+    func didFailWithError(error: String) {
         print(error)
     }
 }
@@ -153,6 +174,29 @@ extension BoardViewController: TriviaManagerDelegate {
     // MARK: UICollectionViewDelegate
 extension BoardViewController: UICollectionViewDelegate {
   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == contentSegueIdentifier {
+            let destinationVC = segue.destination as! ContentViewController
+            if let indexPaths = boardCollectionView.indexPathsForSelectedItems {
+                let columnNumber = indexPaths[0].row / Int(itemsPerColumn)
+                let rowNumber = indexPaths[0].row % Int(itemsPerColumn)
+                destinationVC.content = boardData[columnNumber][rowNumber - 1]
+                
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? WWCollectionViewCell {
+            cell.label.text = ""
+            cell.imageView.backgroundColor = UIColor.systemBackground
+            cell.isUserInteractionEnabled = false
+            
+            
+        }
+        performSegue(withIdentifier: contentSegueIdentifier, sender: self)
+    }
+    
     
 
     /*
