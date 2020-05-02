@@ -15,6 +15,9 @@
 		414B5B81245B2469003FBCBB /* ResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B80245B2469003FBCBB /* ResponseViewController.swift */; };
 		414B5B85245B317A003FBCBB /* ShowContentAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B84245B317A003FBCBB /* ShowContentAnimator.swift */; };
 		414B5B87245B394A003FBCBB /* ShowContentSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B86245B394A003FBCBB /* ShowContentSegue.swift */; };
+		414B5B8C245B523B003FBCBB /* FlipPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B8B245B523B003FBCBB /* FlipPresentationAnimationController.swift */; };
+		414B5B90245B5637003FBCBB /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B8E245B5637003FBCBB /* AnimationHelper.swift */; };
+		414B5B91245B5637003FBCBB /* StoryboardSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B8F245B5637003FBCBB /* StoryboardSupport.swift */; };
 		4154FC4B24538EBD00DD7BD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4154FC4A24538EBD00DD7BD0 /* AppDelegate.swift */; };
 		4154FC4D24538EBD00DD7BD0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4154FC4C24538EBD00DD7BD0 /* SceneDelegate.swift */; };
 		4154FC5224538EBD00DD7BD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4154FC5024538EBD00DD7BD0 /* Main.storyboard */; };
@@ -34,6 +37,9 @@
 		414B5B80245B2469003FBCBB /* ResponseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseViewController.swift; sourceTree = "<group>"; };
 		414B5B84245B317A003FBCBB /* ShowContentAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowContentAnimator.swift; sourceTree = "<group>"; };
 		414B5B86245B394A003FBCBB /* ShowContentSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowContentSegue.swift; sourceTree = "<group>"; };
+		414B5B8B245B523B003FBCBB /* FlipPresentationAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipPresentationAnimationController.swift; sourceTree = "<group>"; };
+		414B5B8E245B5637003FBCBB /* AnimationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
+		414B5B8F245B5637003FBCBB /* StoryboardSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSupport.swift; sourceTree = "<group>"; };
 		4154FC4724538EBD00DD7BD0 /* WW-CV-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WW-CV-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4154FC4A24538EBD00DD7BD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4154FC4C24538EBD00DD7BD0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,9 +86,7 @@
 		414B5B4E24576C1C003FBCBB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4154FC5024538EBD00DD7BD0 /* Main.storyboard */,
 				41CBDBB12454C7C50077C4CA /* WWCollectionViewCell.swift */,
-				4154FC5524538EC100DD7BD0 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -95,6 +99,44 @@
 				414B5B5424576CB2003FBCBB /* TriviaManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		414B5B88245B50C8003FBCBB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				4154FC5524538EC100DD7BD0 /* LaunchScreen.storyboard */,
+				4154FC5024538EBD00DD7BD0 /* Main.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		414B5B89245B5113003FBCBB /* Bundle files */ = {
+			isa = PBXGroup;
+			children = (
+				4154FC4C24538EBD00DD7BD0 /* SceneDelegate.swift */,
+				4154FC4A24538EBD00DD7BD0 /* AppDelegate.swift */,
+				4154FC5324538EC100DD7BD0 /* Assets.xcassets */,
+			);
+			path = "Bundle files";
+			sourceTree = "<group>";
+		};
+		414B5B8A245B5152003FBCBB /* Animation controllers */ = {
+			isa = PBXGroup;
+			children = (
+				414B5B84245B317A003FBCBB /* ShowContentAnimator.swift */,
+				414B5B86245B394A003FBCBB /* ShowContentSegue.swift */,
+				414B5B8B245B523B003FBCBB /* FlipPresentationAnimationController.swift */,
+			);
+			path = "Animation controllers";
+			sourceTree = "<group>";
+		};
+		414B5B8D245B55F7003FBCBB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				414B5B8E245B5637003FBCBB /* AnimationHelper.swift */,
+				414B5B8F245B5637003FBCBB /* StoryboardSupport.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		4154FC3E24538EBD00DD7BD0 = {
@@ -118,15 +160,14 @@
 		4154FC4924538EBD00DD7BD0 /* WW-CV-Test */ = {
 			isa = PBXGroup;
 			children = (
-				4154FC4A24538EBD00DD7BD0 /* AppDelegate.swift */,
-				4154FC4C24538EBD00DD7BD0 /* SceneDelegate.swift */,
-				414B5B4E24576C1C003FBCBB /* Views */,
-				4154FC5324538EC100DD7BD0 /* Assets.xcassets */,
 				4154FC5824538EC100DD7BD0 /* Info.plist */,
+				414B5B8D245B55F7003FBCBB /* Helpers */,
 				414B5B4D24576BEA003FBCBB /* Controllers */,
+				414B5B8A245B5152003FBCBB /* Animation controllers */,
+				414B5B88245B50C8003FBCBB /* UI */,
+				414B5B4E24576C1C003FBCBB /* Views */,
+				414B5B89245B5113003FBCBB /* Bundle files */,
 				414B5B5124576C64003FBCBB /* Model */,
-				414B5B84245B317A003FBCBB /* ShowContentAnimator.swift */,
-				414B5B86245B394A003FBCBB /* ShowContentSegue.swift */,
 			);
 			path = "WW-CV-Test";
 			sourceTree = "<group>";
@@ -260,11 +301,14 @@
 				414B5B5524576CB2003FBCBB /* TriviaManager.swift in Sources */,
 				4154FC4D24538EBD00DD7BD0 /* SceneDelegate.swift in Sources */,
 				4154FC632454C01300DD7BD0 /* BoardViewController.swift in Sources */,
+				414B5B91245B5637003FBCBB /* StoryboardSupport.swift in Sources */,
 				414B5B5324576C98003FBCBB /* TriviaModel.swift in Sources */,
 				414B5B87245B394A003FBCBB /* ShowContentSegue.swift in Sources */,
 				414B5B81245B2469003FBCBB /* ResponseViewController.swift in Sources */,
 				41CBDBB22454C7C50077C4CA /* WWCollectionViewCell.swift in Sources */,
 				414B5B85245B317A003FBCBB /* ShowContentAnimator.swift in Sources */,
+				414B5B90245B5637003FBCBB /* AnimationHelper.swift in Sources */,
+				414B5B8C245B523B003FBCBB /* FlipPresentationAnimationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

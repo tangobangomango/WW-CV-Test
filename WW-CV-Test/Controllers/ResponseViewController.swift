@@ -8,12 +8,17 @@
 
 import UIKit
 
+//protocol ResponseDelegate {
+//    func didUpdateScore(scoreChange: [Int])
+//}
+
 
 
 class ResponseViewController: UIViewController {
 
     var content: TriviaModel?
-    
+//    var delegate: ResponseDelegate?
+    var newScores = [0, 0, 0]
    
     @IBOutlet weak var responseLabel: UILabel!
     
@@ -22,6 +27,42 @@ class ResponseViewController: UIViewController {
         responseLabel.text = content?.correctResponseString
 
  
+    }
+    
+    
+    @IBAction func correctPlayer1(_ sender: UIButton) {
+        newScores[0] = (content?.value)!
+        performSegue(withIdentifier: "UnwindToBoard", sender: self)
+    }
+    
+    @IBAction func wrongPlayer1(_ sender: UIButton) {
+        newScores[0] = -(content?.value)!
+        performSegue(withIdentifier: "UnwindToBoard", sender: self)
+    }
+    
+    @IBAction func correctPlayer2(_ sender: UIButton) {
+        newScores[1] = (content?.value)!
+        performSegue(withIdentifier: "UnwindToBoard", sender: self)
+    }
+    @IBAction func wrongPlayer2(_ sender: UIButton) {
+        newScores[1] = -(content?.value)!
+        performSegue(withIdentifier: "UnwindToBoard", sender: self)
+    }
+    @IBAction func correctPlayer3(_ sender: UIButton) {
+        newScores[2] = (content?.value)!
+        performSegue(withIdentifier: "UnwindToBoard", sender: self)
+    }
+    @IBAction func wrongPlayer3(_ sender: UIButton) {
+        newScores[2] = -(content?.value)!
+        performSegue(withIdentifier: "UnwindToBoard", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "UnwindToBoard" {
+            let destinationVC = segue.destination as? BoardViewController
+            destinationVC?.newScores = newScores
+            
+        }
     }
     
     

@@ -48,7 +48,8 @@ struct TriviaManager {
                     if let value = response.value {
                         print(value.id)
                         let preparedCategory = self.prepareCategory(from: value, for: gameType)
-                        if !preparedCategory.isEmpty {
+                        print("Category: \(value.id) Count: \(preparedCategory.count)")
+                        if !preparedCategory.isEmpty  && preparedCategory.count == 5 {
                             items.append(preparedCategory)
                         }
                         
@@ -82,7 +83,10 @@ struct TriviaManager {
             
             
             if category != "" && oneAnswer != "" && oneQuestion != "" && oneValue != nil {
-                content.append(TriviaModel(categoryName: category, correctResponse: oneAnswer, cardContent: oneQuestion, value: oneValue))
+                
+                   content.append(TriviaModel(categoryName: category, correctResponse: oneAnswer, cardContent: oneQuestion, value: oneValue))
+                
+                
             }
         }
         

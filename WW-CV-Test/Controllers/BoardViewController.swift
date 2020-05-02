@@ -24,13 +24,23 @@ class BoardViewController: UIViewController {
     var triviaManager = TriviaManager()
     
     var boardData: [[TriviaModel]] = []
+    var scores: [Int] = [0, 0, 0]
+    var newScores: [Int] = [0, 0, 0]
+    var questionCount = 0
 
     let blankSingle = ["", "$100", "$200", "$300", "$400", "$500"]
            
     let blankDouble = ["", "$200", "$400", "$600", "$800", "$1000"]
     
-
+    var formatter = NumberFormatter()
+    
+    
+    
     @IBOutlet weak var boardCollectionView: UICollectionView!
+    
+    @IBOutlet weak var player1Score: UILabel!
+    @IBOutlet weak var player2Score: UILabel!
+    @IBOutlet weak var player3Score: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +50,7 @@ class BoardViewController: UIViewController {
         triviaManager.delegate = self
         let catIDS = generateRandomCategories(topOfRange: topOfCategoryRange)
         triviaManager.fetch(catIDS, for: gameType)
+        updateDisplay()
 
     }
     
@@ -51,13 +62,45 @@ class BoardViewController: UIViewController {
         return randomCategories
     }
     
+
+    
+    func updateDisplay() {
+        for i in 0...2 {
+            scores[i] += newScores[i]
+        }
+        
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 0
+        
+        player1Score.text = formatter.string(from: NSNumber(value: scores[0]))
+        player2Score.text = formatter.string(from: NSNumber(value: scores[1]))
+        player3Score.text = formatter.string(from: NSNumber(value: scores[2]))
+    }
+    
+    func checkForGameOver() {
+        questionCount += 1
+        print(questionCount)
+
+        if questionCount == 3 {
+            let alert = UIAlertController(title: "Game Over", message: "We hope you enjoyed the game", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Goodbye", style: .cancel, handler: nil))
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+
+        }
+    }
+    
     // MARK: - Navigation
     
     
     
     @IBAction func unwindToBoardViewController(_ unwindSegue: UIStoryboardSegue) {
-        let sourceViewController = unwindSegue.source
+//        let sourceViewController = unwindSegue.source
         // Use data from the view controller which initiated the unwind segue
+        updateDisplay()
+        checkForGameOver()
     }
     
 }
@@ -122,6 +165,7 @@ extension BoardViewController: UICollectionViewDelegateFlowLayout {
       let heightPerItem = availableHeight / itemsPerColumn
       
       return CGSize(width: widthPerItem, height: heightPerItem)
+        
     }
     
     
@@ -151,6 +195,12 @@ extension BoardViewController: TriviaManagerDelegate {
                 let newCategories = self.generateRandomCategories(topOfRange: topOfCategoryRange)
                 triviaManager.fetch(newCategories, for: self.gameType)
             }
+//            for triviaModel in triviaModels {
+//                if triviaModel.count != 5 {
+//                    let newCategories = self.generateRandomCategories(topOfRange: topOfCategoryRange)
+//                    triviaManager.fetch(newCategories, for: self.gameType)
+//                }
+           //}
             self.boardData = triviaModels
             for triviaModel in triviaModels {
                 print(triviaModel[0].categoryName)
@@ -163,6 +213,22 @@ extension BoardViewController: TriviaManagerDelegate {
         print(error)
     }
 }
+
+//extension BoardViewController: ResponseDelegate {
+//
+//    func didUpdateScore(scoreChange: [Int]) {
+//        print("called")
+//        for i in 0...2 {
+//            scores[i] += scoreChange[i]
+//            print(scores)
+//
+//        }
+//        player1Score.text = String(scores[0])
+//    }
+    
+    
+    
+//}
 
 
 
@@ -180,7 +246,15 @@ extension BoardViewController: UICollectionViewDelegate {
             if let indexPaths = boardCollectionView.indexPathsForSelectedItems {
                 let columnNumber = indexPaths[0].row / Int(itemsPerColumn)
                 let rowNumber = indexPaths[0].row % Int(itemsPerColumn)
+                print("column: \(columnNumber)")
+                print("row: \(rowNumber)")
+                for i in 0...5 {
+                    print("column \(i) count: \(boardData[i].count)")
+                }
+                
+                
                 destinationVC.content = boardData[columnNumber][rowNumber - 1]
+                
                 
             }
         }
@@ -196,39 +270,6 @@ extension BoardViewController: UICollectionViewDelegate {
         }
         performSegue(withIdentifier: contentSegueIdentifier, sender: self)
     }
-    
-    
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
-    
 }
 
 
