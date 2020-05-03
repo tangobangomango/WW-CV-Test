@@ -84,9 +84,7 @@ struct TriviaManager {
             
             if category != "" && oneAnswer != "" && oneQuestion != "" && oneValue != nil {
                 
-                   content.append(TriviaModel(categoryName: category, correctResponse: oneAnswer, cardContent: oneQuestion, value: oneValue))
-                
-                
+                    content.append(TriviaModel(categoryName: category, correctResponse: oneAnswer, cardContent: oneQuestion, value: oneValue))
             }
         }
         

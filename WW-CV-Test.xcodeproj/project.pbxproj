@@ -18,6 +18,8 @@
 		414B5B8C245B523B003FBCBB /* FlipPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B8B245B523B003FBCBB /* FlipPresentationAnimationController.swift */; };
 		414B5B90245B5637003FBCBB /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B8E245B5637003FBCBB /* AnimationHelper.swift */; };
 		414B5B91245B5637003FBCBB /* StoryboardSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B8F245B5637003FBCBB /* StoryboardSupport.swift */; };
+		414B5B93245E1C32003FBCBB /* UIView+DesignableButtonsLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B92245E1C32003FBCBB /* UIView+DesignableButtonsLabels.swift */; };
+		414B5B99245F5445003FBCBB /* OPTIKorinna-Agency.otf in Resources */ = {isa = PBXBuildFile; fileRef = 414B5B98245F53BB003FBCBB /* OPTIKorinna-Agency.otf */; };
 		4154FC4B24538EBD00DD7BD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4154FC4A24538EBD00DD7BD0 /* AppDelegate.swift */; };
 		4154FC4D24538EBD00DD7BD0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4154FC4C24538EBD00DD7BD0 /* SceneDelegate.swift */; };
 		4154FC5224538EBD00DD7BD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4154FC5024538EBD00DD7BD0 /* Main.storyboard */; };
@@ -40,6 +42,8 @@
 		414B5B8B245B523B003FBCBB /* FlipPresentationAnimationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipPresentationAnimationController.swift; sourceTree = "<group>"; };
 		414B5B8E245B5637003FBCBB /* AnimationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
 		414B5B8F245B5637003FBCBB /* StoryboardSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardSupport.swift; sourceTree = "<group>"; };
+		414B5B92245E1C32003FBCBB /* UIView+DesignableButtonsLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+DesignableButtonsLabels.swift"; sourceTree = "<group>"; };
+		414B5B98245F53BB003FBCBB /* OPTIKorinna-Agency.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OPTIKorinna-Agency.otf"; sourceTree = "<group>"; };
 		4154FC4724538EBD00DD7BD0 /* WW-CV-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WW-CV-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4154FC4A24538EBD00DD7BD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4154FC4C24538EBD00DD7BD0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 			children = (
 				4154FC4C24538EBD00DD7BD0 /* SceneDelegate.swift */,
 				4154FC4A24538EBD00DD7BD0 /* AppDelegate.swift */,
+				414B5B98245F53BB003FBCBB /* OPTIKorinna-Agency.otf */,
 				4154FC5324538EC100DD7BD0 /* Assets.xcassets */,
 			);
 			path = "Bundle files";
@@ -135,6 +140,7 @@
 			children = (
 				414B5B8E245B5637003FBCBB /* AnimationHelper.swift */,
 				414B5B8F245B5637003FBCBB /* StoryboardSupport.swift */,
+				414B5B92245E1C32003FBCBB /* UIView+DesignableButtonsLabels.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -243,6 +249,7 @@
 				4154FC5724538EC100DD7BD0 /* LaunchScreen.storyboard in Resources */,
 				4154FC5424538EC100DD7BD0 /* Assets.xcassets in Resources */,
 				4154FC5224538EBD00DD7BD0 /* Main.storyboard in Resources */,
+				414B5B99245F5445003FBCBB /* OPTIKorinna-Agency.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +307,7 @@
 				414B5B5024576C5A003FBCBB /* TriviaData.swift in Sources */,
 				414B5B5524576CB2003FBCBB /* TriviaManager.swift in Sources */,
 				4154FC4D24538EBD00DD7BD0 /* SceneDelegate.swift in Sources */,
+				414B5B93245E1C32003FBCBB /* UIView+DesignableButtonsLabels.swift in Sources */,
 				4154FC632454C01300DD7BD0 /* BoardViewController.swift in Sources */,
 				414B5B91245B5637003FBCBB /* StoryboardSupport.swift in Sources */,
 				414B5B5324576C98003FBCBB /* TriviaModel.swift in Sources */,

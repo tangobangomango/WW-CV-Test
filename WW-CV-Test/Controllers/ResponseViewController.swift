@@ -24,7 +24,8 @@ class ResponseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        responseLabel.text = content?.correctResponseString
+        responseLabel.text = content?.correctResponseString.uppercased()
+        responseLabel.font = UIFont(name: "OPTIKorinna-Agency", size: 50)
 
  
     }

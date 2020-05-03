@@ -31,11 +31,11 @@ class WWCollectionViewCell: UICollectionViewCell {
     }
     
     func addLabel() {
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.font = UIFont.boldSystemFont(ofSize: 22)
         label.textColor = UIColor.black
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.minimumScaleFactor = 0.8
+        label.minimumScaleFactor = 0.7
         label.adjustsFontSizeToFitWidth = true
 //        label.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20.0, leading: 20.0, bottom: 20.0, trailing: 20.0)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +53,7 @@ class WWCollectionViewCell: UICollectionViewCell {
     
     func addImageView() {
         
-        imageView.backgroundColor = UIColor.systemYellow
+//        imageView.backgroundColor = UIColor.systemYellow
 //        imageView.contentMode = UIView.ContentMode.scaleToFill
         imageView.frame.size.width = self.frame.size.width
         imageView.frame.size.height = self.frame.size.height

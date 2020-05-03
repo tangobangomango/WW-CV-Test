@@ -18,7 +18,8 @@ class ContentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        questionLabel.text = content?.cardContent
+        questionLabel.text = content?.cardContent.uppercased()
+        questionLabel.font = UIFont(name: "OPTIKorinna-Agency", size: 50)
 
         // Do any additional setup after loading the view.
     }

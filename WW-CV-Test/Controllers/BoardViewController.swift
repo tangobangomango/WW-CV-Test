@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import iProgressHUD
 
 private let reuseIdentifier = "Cell"
 private let contentSegueIdentifier = "ShowContent"
 private let sectionInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
 private let itemsPerRow: CGFloat = 6
 private let itemsPerColumn: CGFloat = 6
-private let topOfCategoryRange = 1000
+private let topOfCategoryRange = 3000
 
 
 class BoardViewController: UIViewController {
@@ -29,7 +30,6 @@ class BoardViewController: UIViewController {
     var questionCount = 0
 
     let blankSingle = ["", "$100", "$200", "$300", "$400", "$500"]
-           
     let blankDouble = ["", "$200", "$400", "$600", "$800", "$1000"]
     
     var formatter = NumberFormatter()
@@ -37,7 +37,6 @@ class BoardViewController: UIViewController {
     
     
     @IBOutlet weak var boardCollectionView: UICollectionView!
-    
     @IBOutlet weak var player1Score: UILabel!
     @IBOutlet weak var player2Score: UILabel!
     @IBOutlet weak var player3Score: UILabel!
@@ -51,7 +50,36 @@ class BoardViewController: UIViewController {
         let catIDS = generateRandomCategories(topOfRange: topOfCategoryRange)
         triviaManager.fetch(catIDS, for: gameType)
         updateDisplay()
+        showProgressIndicator()
+//        printFontNames()
+        
 
+    }
+    
+    func printFontNames() {
+        for family: String in UIFont.familyNames
+        {
+            print(family)
+            for names: String in UIFont.fontNames(forFamilyName: family)
+            {
+                print("== \(names)")
+            }
+        }
+    }
+    
+    
+    func showProgressIndicator() {
+        let iProgress = iProgressHUD()
+        iProgress.isShowModal = true
+        iProgress.isTouchDismiss = false
+        iProgress.boxSize = 30
+        iProgress.indicatorStyle = .ballGridPulse
+        iProgress.captionDistance = 30
+        
+//        iProgress.indicatorSize = 30
+        iProgress.attachProgress(toView: view)
+        view.showProgress()
+        view.updateCaption(text: "Getting some hard ones ...")
     }
     
     func generateRandomCategories(topOfRange: Int) -> [Int] {
@@ -97,8 +125,7 @@ class BoardViewController: UIViewController {
     
     
     @IBAction func unwindToBoardViewController(_ unwindSegue: UIStoryboardSegue) {
-//        let sourceViewController = unwindSegue.source
-        // Use data from the view controller which initiated the unwind segue
+
         updateDisplay()
         checkForGameOver()
     }
@@ -121,7 +148,12 @@ extension BoardViewController: UICollectionViewDataSource {
 
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! WWCollectionViewCell
-
+        
+        cell.imageView.image = UIImage(named: "card")
+        
+        
+        
+        
          let columnNumber = indexPath.row / Int(itemsPerColumn)
          let rowNumber = indexPath.row % Int(itemsPerColumn)
         
@@ -134,8 +166,13 @@ extension BoardViewController: UICollectionViewDataSource {
         if boardData.count == 6 {
             if rowNumber == 0 {
                 let cellLabel = "\(boardData[columnNumber][0].categoryName)"
-                cell.label.text = cellLabel.capitalized
+                cell.label.text = cellLabel.uppercased()
+                cell.label.textColor = .white
                cell.isUserInteractionEnabled = false
+            } else {
+                cell.label.textColor = UIColor.systemYellow
+                cell.label.font = UIFont(name: "Georgia-Bold", size: 45)
+                
             }
             
         }
@@ -194,17 +231,14 @@ extension BoardViewController: TriviaManagerDelegate {
             if triviaModels.count != 6 {
                 let newCategories = self.generateRandomCategories(topOfRange: topOfCategoryRange)
                 triviaManager.fetch(newCategories, for: self.gameType)
+                return
             }
-//            for triviaModel in triviaModels {
-//                if triviaModel.count != 5 {
-//                    let newCategories = self.generateRandomCategories(topOfRange: topOfCategoryRange)
-//                    triviaManager.fetch(newCategories, for: self.gameType)
-//                }
-           //}
+
             self.boardData = triviaModels
             for triviaModel in triviaModels {
                 print(triviaModel[0].categoryName)
             }
+            self.view.dismissProgress()
             self.boardCollectionView.reloadData()
         }
     }
@@ -213,28 +247,6 @@ extension BoardViewController: TriviaManagerDelegate {
         print(error)
     }
 }
-
-//extension BoardViewController: ResponseDelegate {
-//
-//    func didUpdateScore(scoreChange: [Int]) {
-//        print("called")
-//        for i in 0...2 {
-//            scores[i] += scoreChange[i]
-//            print(scores)
-//
-//        }
-//        player1Score.text = String(scores[0])
-//    }
-    
-    
-    
-//}
-
-
-
-
-
-
 
 
     // MARK: UICollectionViewDelegate
@@ -263,7 +275,8 @@ extension BoardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? WWCollectionViewCell {
             cell.label.text = ""
-            cell.imageView.backgroundColor = UIColor.systemBackground
+            cell.imageView.image = UIImage(named: "")
+            cell.imageView.backgroundColor = UIColor.black
             cell.isUserInteractionEnabled = false
             
             
