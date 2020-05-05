@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		26B8C8838CB4138BE240B52A /* Pods_WW_CV_Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 159EA795E4CF4FC882771E4F /* Pods_WW_CV_Test.framework */; };
+		410DD7BF2460781800A63736 /* UIButton+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410DD7BE2460781800A63736 /* UIButton+Gradient.swift */; };
+		410DD7C12460AF5E00A63736 /* GameSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410DD7C02460AF5E00A63736 /* GameSetupViewController.swift */; };
 		414B5B5024576C5A003FBCBB /* TriviaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B4F24576C5A003FBCBB /* TriviaData.swift */; };
 		414B5B5324576C98003FBCBB /* TriviaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B5224576C98003FBCBB /* TriviaModel.swift */; };
 		414B5B5524576CB2003FBCBB /* TriviaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B5B5424576CB2003FBCBB /* TriviaManager.swift */; };
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		0102D3EC6557B4B67814DFC2 /* Pods-WW-CV-Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WW-CV-Test.debug.xcconfig"; path = "Target Support Files/Pods-WW-CV-Test/Pods-WW-CV-Test.debug.xcconfig"; sourceTree = "<group>"; };
 		159EA795E4CF4FC882771E4F /* Pods_WW_CV_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WW_CV_Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		410DD7BE2460781800A63736 /* UIButton+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Gradient.swift"; sourceTree = "<group>"; };
+		410DD7C02460AF5E00A63736 /* GameSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetupViewController.swift; sourceTree = "<group>"; };
 		414B5B4F24576C5A003FBCBB /* TriviaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaData.swift; sourceTree = "<group>"; };
 		414B5B5224576C98003FBCBB /* TriviaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaModel.swift; sourceTree = "<group>"; };
 		414B5B5424576CB2003FBCBB /* TriviaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaManager.swift; sourceTree = "<group>"; };
@@ -83,6 +87,7 @@
 				414B5B7E245A2023003FBCBB /* ContentViewController.swift */,
 				4154FC622454C01300DD7BD0 /* BoardViewController.swift */,
 				414B5B80245B2469003FBCBB /* ResponseViewController.swift */,
+				410DD7C02460AF5E00A63736 /* GameSetupViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 				414B5B8E245B5637003FBCBB /* AnimationHelper.swift */,
 				414B5B8F245B5637003FBCBB /* StoryboardSupport.swift */,
 				414B5B92245E1C32003FBCBB /* UIView+DesignableButtonsLabels.swift */,
+				410DD7BE2460781800A63736 /* UIButton+Gradient.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -305,8 +311,10 @@
 				414B5B7F245A2023003FBCBB /* ContentViewController.swift in Sources */,
 				4154FC4B24538EBD00DD7BD0 /* AppDelegate.swift in Sources */,
 				414B5B5024576C5A003FBCBB /* TriviaData.swift in Sources */,
+				410DD7C12460AF5E00A63736 /* GameSetupViewController.swift in Sources */,
 				414B5B5524576CB2003FBCBB /* TriviaManager.swift in Sources */,
 				4154FC4D24538EBD00DD7BD0 /* SceneDelegate.swift in Sources */,
+				410DD7BF2460781800A63736 /* UIButton+Gradient.swift in Sources */,
 				414B5B93245E1C32003FBCBB /* UIView+DesignableButtonsLabels.swift in Sources */,
 				4154FC632454C01300DD7BD0 /* BoardViewController.swift in Sources */,
 				414B5B91245B5637003FBCBB /* StoryboardSupport.swift in Sources */,
@@ -464,6 +472,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JJCNM7HZK3;
 				INFOPLIST_FILE = "WW-CV-Test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -483,6 +492,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JJCNM7HZK3;
 				INFOPLIST_FILE = "WW-CV-Test/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

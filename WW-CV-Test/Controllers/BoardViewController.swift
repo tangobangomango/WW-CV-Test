@@ -14,14 +14,14 @@ private let contentSegueIdentifier = "ShowContent"
 private let sectionInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
 private let itemsPerRow: CGFloat = 6
 private let itemsPerColumn: CGFloat = 6
-private let topOfCategoryRange = 3000
+private let topOfCategoryRange = 500
 
 
 class BoardViewController: UIViewController {
     
     var questionsAndAnswers: [TriviaModel] = []
-    var gameType: TriviaModel.gameType = .single
-    
+    var gameType: TriviaModel.gameType?
+    var playerNames: [String?] = []
     var triviaManager = TriviaManager()
     
     var boardData: [[TriviaModel]] = []
@@ -37,19 +37,45 @@ class BoardViewController: UIViewController {
     
     
     @IBOutlet weak var boardCollectionView: UICollectionView!
+    
+    @IBOutlet weak var player1Name: UILabel!
+    @IBOutlet weak var player2Name: UILabel!
+    @IBOutlet weak var player3Name: UILabel!
     @IBOutlet weak var player1Score: UILabel!
     @IBOutlet weak var player2Score: UILabel!
     @IBOutlet weak var player3Score: UILabel!
+    
+    fileprivate func setupNames() {
+        player1Name.text = playerNames[0]
+        if let player2 = playerNames[1] {
+            player2Name.text = player2
+        } else {
+            player2Name.text = ""
+        }
+        
+        if let player3 = playerNames[2] {
+            player3Name.text = player3
+        } else {
+            player3Name.text = ""
+        }
+        
+        print(playerNames)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         boardCollectionView.delegate = self
         boardCollectionView.dataSource = self
         boardCollectionView.register(WWCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
         triviaManager.delegate = self
         let catIDS = generateRandomCategories(topOfRange: topOfCategoryRange)
-        triviaManager.fetch(catIDS, for: gameType)
+        
+        triviaManager.fetch(catIDS, for: gameType!)
+        setupNames()
         updateDisplay()
+        
         showProgressIndicator()
 //        printFontNames()
         
@@ -101,8 +127,19 @@ class BoardViewController: UIViewController {
         formatter.maximumFractionDigits = 0
         
         player1Score.text = formatter.string(from: NSNumber(value: scores[0]))
-        player2Score.text = formatter.string(from: NSNumber(value: scores[1]))
-        player3Score.text = formatter.string(from: NSNumber(value: scores[2]))
+        
+        if player2Name.text != "" {
+            player2Score.text = formatter.string(from: NSNumber(value: scores[1]))
+        } else {
+            player2Score.text = ""
+        }
+        
+        if player3Name.text != "" {
+            player3Score.text = formatter.string(from: NSNumber(value: scores[2]))
+        } else {
+            player3Score.text = ""
+        }
+        
     }
     
     func checkForGameOver() {
@@ -230,7 +267,7 @@ extension BoardViewController: TriviaManagerDelegate {
             print(triviaModels.count)
             if triviaModels.count != 6 {
                 let newCategories = self.generateRandomCategories(topOfRange: topOfCategoryRange)
-                triviaManager.fetch(newCategories, for: self.gameType)
+                triviaManager.fetch(newCategories, for: self.gameType!)
                 return
             }
 
@@ -275,7 +312,7 @@ extension BoardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? WWCollectionViewCell {
             cell.label.text = ""
-            cell.imageView.image = UIImage(named: "")
+            
             cell.imageView.backgroundColor = UIColor.black
             cell.isUserInteractionEnabled = false
             
