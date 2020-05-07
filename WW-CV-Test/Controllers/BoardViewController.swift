@@ -154,15 +154,31 @@ class BoardViewController: UIViewController {
     func checkForGameOver() {
         questionCount += 1
         print(questionCount)
-
-        if questionCount == 3 {
-            let alert = UIAlertController(title: "Game Over", message: "We hope you enjoyed the game", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Goodbye", style: .cancel, handler: nil))
-            DispatchQueue.main.async {
-                self.present(alert, animated: true, completion: nil)
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 0
+        
+        if questionCount == 30 {
+            //https://stackoverflow.com/questions/35807334/how-to-dismiss-a-uiviewcontroller-from-a-uialertcontrollers-uialertaction-handl
+            let score1 = formatter.string(from: NSNumber(value: scores[0]))
+            var message = "Final Scores \n\(player1Name.text!): \(score1!)"
+            if player2Name.text != "" {
+                let score2 = formatter.string(from: NSNumber(value: scores[1]))
+                message += "\n\(player2Name.text!): \(score2!)"
+            }
+            if player3Name.text != "" {
+                let score3 = formatter.string(from: NSNumber(value: scores[2]))
+                message += "\n\(player3Name.text!): \(score3!)"
             }
             
 
+            let alert = UIAlertController(title: "Game Over", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Goodbye", style: .cancel) { action in
+                self.navigationController?.popViewController(animated: true)
+                
+            })
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+                }
         }
     }
     

@@ -34,7 +34,9 @@ class WWCollectionViewCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.textColor = UIColor.black
         label.numberOfLines = 0
+//        label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .center
+        
         label.minimumScaleFactor = 0.7
         label.adjustsFontSizeToFitWidth = true
 //        label.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 20.0, leading: 20.0, bottom: 20.0, trailing: 20.0)

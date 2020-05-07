@@ -540,6 +540,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="qYJ-h9-bVd"/>
                     <connections>
+                        <outlet property="player1NameLabel" destination="PUe-fu-N3b" id="Brm-Yv-8Fh"/>
                         <outlet property="player2CorrectButton" destination="rpT-le-AGS" id="3JE-OD-exb"/>
                         <outlet property="player2NameLabel" destination="MRi-Rz-PY8" id="dPw-9h-RO7"/>
                         <outlet property="player2WrongButton" destination="5WI-XY-zao" id="vQb-pv-7sE"/>

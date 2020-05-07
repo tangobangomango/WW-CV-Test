@@ -23,6 +23,7 @@ class ResponseViewController: UIViewController {
    
     @IBOutlet weak var responseLabel: UILabel!
     
+    @IBOutlet weak var player1NameLabel: UILabel!
     @IBOutlet weak var player2NameLabel: UILabel!
     @IBOutlet weak var player2CorrectButton: GradientButton!
     @IBOutlet weak var player2WrongButton: GradientButton!
@@ -36,9 +37,16 @@ class ResponseViewController: UIViewController {
         super.viewDidLoad()
         responseLabel.text = content?.correctResponseString.uppercased()
         responseLabel.font = UIFont(name: "OPTIKorinna-Agency", size: 50)
+        insertPlayerNames()
         deactivateAndHideButtons()
         
  
+    }
+    
+    func insertPlayerNames() {
+        player1NameLabel.text = playerNames[0]
+        player2NameLabel.text = playerNames[1]
+        player3NameLabel.text = playerNames[2]
     }
     
     func deactivateAndHideButtons() {
