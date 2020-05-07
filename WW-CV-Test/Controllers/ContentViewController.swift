@@ -13,6 +13,7 @@ private let responseSegueIdentifier = "ShowResponse"
 class ContentViewController: UIViewController {
     
     var content: TriviaModel?
+    var playerNames: [String?] = []
 
     @IBOutlet weak var questionLabel: UILabel!
     
@@ -20,7 +21,7 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
         questionLabel.text = content?.cardContent.uppercased()
         questionLabel.font = UIFont(name: "OPTIKorinna-Agency", size: 50)
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -28,6 +29,7 @@ class ContentViewController: UIViewController {
         if segue.identifier == responseSegueIdentifier {
             let destinationVC = segue.destination as? ResponseViewController
             destinationVC?.content = content
+            destinationVC?.playerNames = playerNames
         }
     }
     

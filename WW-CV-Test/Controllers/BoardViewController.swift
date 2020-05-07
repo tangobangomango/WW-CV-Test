@@ -14,7 +14,7 @@ private let contentSegueIdentifier = "ShowContent"
 private let sectionInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
 private let itemsPerRow: CGFloat = 6
 private let itemsPerColumn: CGFloat = 6
-private let topOfCategoryRange = 500
+private let topOfCategoryRange = 10000
 
 
 class BoardViewController: UIViewController {
@@ -34,6 +34,8 @@ class BoardViewController: UIViewController {
     
     var formatter = NumberFormatter()
     
+    var cycleCount = 0
+    
     
     
     @IBOutlet weak var boardCollectionView: UICollectionView!
@@ -45,23 +47,7 @@ class BoardViewController: UIViewController {
     @IBOutlet weak var player2Score: UILabel!
     @IBOutlet weak var player3Score: UILabel!
     
-    fileprivate func setupNames() {
-        player1Name.text = playerNames[0]
-        if let player2 = playerNames[1] {
-            player2Name.text = player2
-        } else {
-            player2Name.text = ""
-        }
-        
-        if let player3 = playerNames[2] {
-            player3Name.text = player3
-        } else {
-            player3Name.text = ""
-        }
-        
-        print(playerNames)
-        
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,8 +57,9 @@ class BoardViewController: UIViewController {
         
         triviaManager.delegate = self
         let catIDS = generateRandomCategories(topOfRange: topOfCategoryRange)
-        
+        print("Going to fetch")
         triviaManager.fetch(catIDS, for: gameType!)
+//        triviaManager.fetchContent(for: gameType!)
         setupNames()
         updateDisplay()
         
@@ -98,7 +85,7 @@ class BoardViewController: UIViewController {
         let iProgress = iProgressHUD()
         iProgress.isShowModal = true
         iProgress.isTouchDismiss = false
-        iProgress.boxSize = 30
+        iProgress.boxSize = 40
         iProgress.indicatorStyle = .ballGridPulse
         iProgress.captionDistance = 30
         
@@ -110,10 +97,28 @@ class BoardViewController: UIViewController {
     
     func generateRandomCategories(topOfRange: Int) -> [Int] {
         var randomCategories: [Int] = []
-        for _ in 0...5 {
+        for _ in 0...9 {
             randomCategories.append(Int.random(in: 1...topOfRange))
         }
         return randomCategories
+    }
+    
+    fileprivate func setupNames() {
+        player1Name.text = playerNames[0]
+        if let player2 = playerNames[1] {
+            player2Name.text = player2
+        } else {
+            player2Name.text = ""
+        }
+        
+        if let player3 = playerNames[2] {
+            player3Name.text = player3
+        } else {
+            player3Name.text = ""
+        }
+        
+//        print(playerNames)
+        
     }
     
 
@@ -126,7 +131,11 @@ class BoardViewController: UIViewController {
         formatter.numberStyle = .currency
         formatter.maximumFractionDigits = 0
         
-        player1Score.text = formatter.string(from: NSNumber(value: scores[0]))
+        if player1Name.text != "" {
+            player1Score.text = formatter.string(from: NSNumber(value: scores[0]))
+        } else {
+            player1Score.text = ""
+        }
         
         if player2Name.text != "" {
             player2Score.text = formatter.string(from: NSNumber(value: scores[1]))
@@ -265,14 +274,26 @@ extension BoardViewController: TriviaManagerDelegate {
         DispatchQueue.main.async {
             print("triviaModel returned")
             print(triviaModels.count)
-            if triviaModels.count != 6 {
+//            if triviaModels.count != 6 {
+//                let newCategories = self.generateRandomCategories(topOfRange: topOfCategoryRange)
+//                triviaManager.fetch(newCategories, for: self.gameType!)
+//                return
+//            }
+            
+            switch triviaModels.count {
+            case 0...5:
                 let newCategories = self.generateRandomCategories(topOfRange: topOfCategoryRange)
                 triviaManager.fetch(newCategories, for: self.gameType!)
+                self.cycleCount += 1
+                print("Cycle: \(self.cycleCount)")
                 return
+            
+            default:
+                self.boardData = Array(triviaModels.prefix(6))
             }
 
-            self.boardData = triviaModels
-            for triviaModel in triviaModels {
+            
+            for triviaModel in self.boardData {
                 print(triviaModel[0].categoryName)
             }
             self.view.dismissProgress()
@@ -295,14 +316,15 @@ extension BoardViewController: UICollectionViewDelegate {
             if let indexPaths = boardCollectionView.indexPathsForSelectedItems {
                 let columnNumber = indexPaths[0].row / Int(itemsPerColumn)
                 let rowNumber = indexPaths[0].row % Int(itemsPerColumn)
-                print("column: \(columnNumber)")
-                print("row: \(rowNumber)")
+//                print("column: \(columnNumber)")
+//                print("row: \(rowNumber)")
                 for i in 0...5 {
-                    print("column \(i) count: \(boardData[i].count)")
+//                    print("column \(i) count: \(boardData[i].count)")
                 }
                 
                 
                 destinationVC.content = boardData[columnNumber][rowNumber - 1]
+                destinationVC.playerNames = playerNames
                 
                 
             }

@@ -45,11 +45,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tDs-OG-2xT">
+                            <textField opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tDs-OG-2xT">
                                 <rect key="frame" x="198" y="513" width="193" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 2:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hnP-eI-M2l">
                                 <rect key="frame" x="91" y="572" width="90" height="29"/>
@@ -58,11 +58,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qOg-QB-XPh">
+                            <textField opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qOg-QB-XPh">
                                 <rect key="frame" x="198" y="567" width="193" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player 3:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgY-tw-Mqf">
                                 <rect key="frame" x="91" y="626" width="91" height="29"/>
@@ -71,11 +71,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Q7-1Q-hY0">
+                            <textField opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Player Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Q7-1Q-hY0">
                                 <rect key="frame" x="198" y="621" width="193" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmv-vf-sIQ">
                                 <rect key="frame" x="777" y="611" width="78" height="48"/>
@@ -86,7 +86,6 @@
                                 </state>
                                 <connections>
                                     <action selector="playPressed:" destination="m54-f2-95E" eventType="touchUpInside" id="Pah-Se-k6f"/>
-                                    <segue destination="hRS-dl-dQO" kind="show" identifier="ShowBoard" id="dMq-ln-XUI"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ylb-x6-Omb">
@@ -118,6 +117,7 @@
                         <outlet property="player1NameTextField" destination="tDs-OG-2xT" id="KYt-uU-xYC"/>
                         <outlet property="player2NameTextField" destination="qOg-QB-XPh" id="A22-Og-9fX"/>
                         <outlet property="player3NameTextField" destination="5Q7-1Q-hY0" id="Qlc-XJ-Lzm"/>
+                        <segue destination="hRS-dl-dQO" kind="show" identifier="ShowBoard" id="L0w-yr-QhA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sDr-Go-k1h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -540,6 +540,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="qYJ-h9-bVd"/>
                     <connections>
+                        <outlet property="player2CorrectButton" destination="rpT-le-AGS" id="3JE-OD-exb"/>
+                        <outlet property="player2NameLabel" destination="MRi-Rz-PY8" id="dPw-9h-RO7"/>
+                        <outlet property="player2WrongButton" destination="5WI-XY-zao" id="vQb-pv-7sE"/>
+                        <outlet property="player3CorrectButton" destination="HHe-bI-x2c" id="Qhf-A4-28X"/>
+                        <outlet property="player3NameLabel" destination="LrN-ln-7mK" id="whe-8p-bRF"/>
+                        <outlet property="player3WrongButton" destination="tEA-wU-Kdv" id="hwW-YC-ebT"/>
                         <outlet property="responseLabel" destination="eqN-5Z-Ngx" id="lyW-br-Qm5"/>
                         <segue destination="smF-sv-7Ql" kind="unwind" identifier="UnwindToBoard" unwindAction="unwindToBoardViewController:" id="EMs-YN-6Ll"/>
                     </connections>
