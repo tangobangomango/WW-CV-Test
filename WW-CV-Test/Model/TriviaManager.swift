@@ -24,56 +24,56 @@ struct TriviaManager {
     let categoriesURLString = "http://jservice.io/api/category?id="
     var content: [[TriviaModel]] = []
     
-    mutating func fetchContent(for gameType: TriviaModel.gameType) {
-        
-        var categoryContent: [TriviaModel] = []
-        print("Starting fetch")
-        while content.count < 6 {
-            categoryContent = fetchCategory(for: gameType)
-            if categoryContent.count == 5 {
-                content.append(categoryContent)
-            }
-        }
-        self.delegate?.didUpdateTriviaData(self, triviaModels: content)
-        
-        
-    }
-    
-    func fetchCategory(for gameType: TriviaModel.gameType) -> [TriviaModel] {
-        
-        let categoryIDToGet = Int.random(in: 1...1000)
-        var categoryContent: [TriviaModel] = []
-        print(categoryIDToGet)
-        let fetchGroup = DispatchGroup()
-        
-        let urls = [categoriesURLString + String(categoryIDToGet)]
-        
-        urls.forEach { (url) in
-            fetchGroup.enter()
-            AF.request(url)
-                .validate()
-                .responseDecodable(of: TriviaData.self) { (response) in
-                    guard response.value != nil else {
-                        self.delegate?.didFailWithError(error: "Decoding error")
-                        return
-                    }
-                    if let value = response.value {
-//                        print(value.id)
-                        categoryContent = self.prepareCategory(from: value, for: gameType)
-//                        print("Category: \(value.id) Count: \(categoryContent.count)")
-                        
-                        
-                    }
-                    fetchGroup.leave()
-            }
-        }
-        fetchGroup.notify(queue: .main) {
-           
-        }
-        
-        return categoryContent
-        
-    }
+//    mutating func fetchContent(for gameType: TriviaModel.gameType) {
+//
+//        var categoryContent: [TriviaModel] = []
+//        print("Starting fetch")
+//        while content.count < 6 {
+//            categoryContent = fetchCategory(for: gameType)
+//            if categoryContent.count == 5 {
+//                content.append(categoryContent)
+//            }
+//        }
+//        self.delegate?.didUpdateTriviaData(self, triviaModels: content)
+//
+//
+//    }
+//
+//    func fetchCategory(for gameType: TriviaModel.gameType) -> [TriviaModel] {
+//
+//        let categoryIDToGet = Int.random(in: 1...1000)
+//        var categoryContent: [TriviaModel] = []
+//        print(categoryIDToGet)
+//        let fetchGroup = DispatchGroup()
+//
+//        let urls = [categoriesURLString + String(categoryIDToGet)]
+//
+//        urls.forEach { (url) in
+//            fetchGroup.enter()
+//            AF.request(url)
+//                .validate()
+//                .responseDecodable(of: TriviaData.self) { (response) in
+//                    guard response.value != nil else {
+//                        self.delegate?.didFailWithError(error: "Decoding error")
+//                        return
+//                    }
+//                    if let value = response.value {
+////                        print(value.id)
+//                        categoryContent = self.prepareCategory(from: value, for: gameType)
+////                        print("Category: \(value.id) Count: \(categoryContent.count)")
+//
+//
+//                    }
+//                    fetchGroup.leave()
+//            }
+//        }
+//        fetchGroup.notify(queue: .main) {
+//
+//        }
+//
+//        return categoryContent
+//
+//    }
     
     
     func fetch(_ categoryIDList: [Int], for gameType: TriviaModel.gameType) {

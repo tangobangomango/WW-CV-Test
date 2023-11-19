@@ -211,7 +211,7 @@ extension BoardViewController: UICollectionViewDataSource {
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! WWCollectionViewCell
         
-        cell.imageView.image = UIImage(named: "card")
+         cell.imageView.image = UIImage(named: "card")
         
         
         
@@ -230,7 +230,7 @@ extension BoardViewController: UICollectionViewDataSource {
                 let cellLabel = "\(boardData[columnNumber][0].categoryName)"
                 cell.label.text = cellLabel.uppercased()
                 cell.label.textColor = .white
-               cell.isUserInteractionEnabled = false
+                cell.isUserInteractionEnabled = false
             } else {
                 cell.label.textColor = UIColor.systemYellow
                 cell.label.font = UIFont(name: "Georgia-Bold", size: 45)
@@ -334,9 +334,6 @@ extension BoardViewController: UICollectionViewDelegate {
                 let rowNumber = indexPaths[0].row % Int(itemsPerColumn)
 //                print("column: \(columnNumber)")
 //                print("row: \(rowNumber)")
-                for i in 0...5 {
-//                    print("column \(i) count: \(boardData[i].count)")
-                }
                 
                 
                 destinationVC.content = boardData[columnNumber][rowNumber - 1]

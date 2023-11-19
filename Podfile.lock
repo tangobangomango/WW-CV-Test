@@ -1,0 +1,28 @@
+PODS:
+  - Alamofire (5.1.0)
+  - iProgressHUD (1.1.1)
+  - IQKeyboardManagerSwift (6.5.5)
+  - PaddingLabel (1.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.1)
+  - iProgressHUD (~> 1.1.1)
+  - IQKeyboardManagerSwift
+  - PaddingLabel (= 1.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - iProgressHUD
+    - IQKeyboardManagerSwift
+    - PaddingLabel
+
+SPEC CHECKSUMS:
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  iProgressHUD: caa742128253c97f2c2e1ec59e2bbe6cf689df6a
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
+  PaddingLabel: e70c0a0cf5b70f1dcf67444ac0cae79f2c105853
+
+PODFILE CHECKSUM: 4e2b562340ed2f14076b1913b3ddfeac7dc33ebf
+
+COCOAPODS: 1.9.1
